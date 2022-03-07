@@ -80,6 +80,7 @@ export interface FormField<
     value: T[K];
     defaultValue: T[K];
     setValue: (value: T[K]) => void;
+    setError: (error: Error | undefined) => void;
     dirty: boolean;
     error: ErrorType<T[K], Error> | undefined;
     state: State;
@@ -109,6 +110,7 @@ export function useListener<T extends object, K extends keyof T, State extends D
         value: form.values[name],
         defaultValue: form.defaultValues[name],
         setValue: (value: T[K]) => form.setValue(name, value),
+        setError: (error: Error | undefined) => form.setError(name, error),
         dirty: form.dirtyMap[name] ?? false,
         error: form.errorMap[name],
         state: form.state,
